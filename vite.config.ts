@@ -39,7 +39,7 @@ export default defineConfig({
         // 脚本运行前加载 通过@require加载的脚本及其“use strict”语句可能会影响用户脚本的严格模式！
         // require: ["jquery", "dengdneg"],
         // preload 预加载可由脚本通过GM_getResourceURL和GM_getResourceText访问的资源。
-        resource: { setting: "./setting.html" },
+        resource: {},
         // 不支持hash路由，支持正则
         include: ["*://www.zhihu.com/*"],
         // match: ["https://www.zhihu.com/*"],

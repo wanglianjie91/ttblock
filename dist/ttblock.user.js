@@ -6,7 +6,6 @@
 // @description  常用中文网站增强, 例如某乎等
 // @icon         https://vitejs.dev/logo.svg
 // @include      *://www.zhihu.com/*
-// @resource     setting  ./setting.html
 // @sandbox      raw
 // @grant        GM.getValue
 // @grant        GM.registerMenuCommand
