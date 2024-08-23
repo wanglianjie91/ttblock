@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>历史记录页面</title>
+    <meta name="description" content="知乎历史记录页面" />
+  </head>
+  <body>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        color: rgb(25, 27, 31);
+      }
+      .history {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        width: 360px;
+        height: 600px;
+        top: 50%;
+        right: 20px;
+        z-index: 9998;
+        background-color: white;
+        transform: translateY(-50%);
+        box-shadow: 0 0 20px 0 rgba(19, 41, 75, 0.2);
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px;
+        max-height: 160px;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzY4IiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGRlZnM+PHBhdGggaWQ9ImEiIGQ9Ik0wIDBoMzY4djE2MEgweiIvPjwvZGVmcz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxtYXNrIGlkPSJiIiBmaWxsPSIjZmZmIj48dXNlIHhsaW5rOmhyZWY9IiNhIi8+PC9tYXNrPjx1c2UgZmlsbD0iIzAwNkVGRiIgeGxpbms6aHJlZj0iI2EiLz48ZyBvcGFjaXR5PSIuNyIgbWFzaz0idXJsKCNiKSI+PHBhdGggZmlsbD0iIzAwNUVFRCIgZD0iTTI1LjYyMy0xMzEuNWwtMTQ4Ljk1NSA4Ni41NjIgMjM5LjI1IDEzOC4xMzJMMjY0Ljg3MyA2LjYzMnoiLz48cGF0aCBmaWxsPSIjMDA2NUZFIiBkPSJNMjUuOTE3LTE2My4zNTRsLTE0OC45NTUgODYuNTYyIDIzOS4yNSAxMzguMTMzIDE0OC45NTUtODYuNTYyeiIvPjxwYXRoIGZpbGw9IiMwMDZERkYiIGQ9Ik0yNS40NTUtMjE3TC0xMjMuNS0xMzAuNDM4IDExNS43NSA3LjY5NGwxNDguOTU2LTg2LjU2MnoiLz48cGF0aCBmaWxsPSIjMUI3NkZGIiBkPSJNLTEyMy4xOS03Ni45MThsLS4xMTIgMTUuMjQ0TDExNS45NDkgNzYuNDU4bC4xMTMtMTUuMjQ0eiIvPjxwYXRoIGZpbGw9IiMwMDVFRUQiIGQ9Ik0yNjUuMTI4LTI1LjM0OUwxMTYuMTczIDYxLjIxNGwtLjExMSAxNS4yNDQgMTQ4Ljk1NC04Ni41NjN6Ii8+PC9nPjxnIG9wYWNpdHk9Ii43IiBtYXNrPSJ1cmwoI2IpIj48cGF0aCBmaWxsPSIjMDA1RUVEIiBkPSJNMzQ4LjcxNi0zNy45MjNMMjQyLjk5OCAyMy40NjVsLS4yODIgOTkuNjEyTDM0OC40MzMgNjEuNjl6Ii8+PHBhdGggZmlsbD0iIzAwNjVGRSIgZD0iTTMyMC43NTYtNTRMMjE1LjE1NSA3LjM4NyAyNDMuMDUzIDIzLjVsMTA1LjYwMi02MS4zODhMMzIwLjc1Ny01NHoiLz48cGF0aCBmaWxsPSIjMUI3NkZGIiBkPSJNMjE1LjI4IDcuMzEybC0uMjggOTkuODUgMjcuNzIgMTYuMTUuMjgtOTkuODV6Ii8+PHBhdGggZmlsbD0iIzAwNTlFMCIgZD0iTTIzMS41IDI1LjMxbDcuNDk0IDQuMzQyLjAwNi0yLjI4NnYtLjA2bC03LjQ5My00LjM0MnoiLz48cGF0aCBmaWxsPSIjMDA2NUZFIiBkPSJNMzU5Ljc1Ni0yOS41TDI1NC4xNTUgMzEuODg3IDI4Mi4wNTMgNDhsMTA1LjYwMi02MS4zODhMMzU5Ljc1Ny0yOS41eiIvPjxwYXRoIGZpbGw9IiMxQjc2RkYiIGQ9Ik0yNTQuMjggMzEuODEybC0uMjggOTkuODUgMjcuNzIgMTYuMTUuMjgtOTkuODV6Ii8+PHBhdGggZmlsbD0iIzAwNTlFMCIgZD0iTTI3MC41IDQ5LjgxbDcuNDk0IDQuMzQyLjAwNi0yLjI4NnYtLjA2bC03LjQ5My00LjM0MnoiLz48cGF0aCBmaWxsPSIjMDA1RUVEIiBkPSJNMzg3LjcxNi0xMy40MjNMMjgxLjk5OCA0Ny45NjVsLS4yODIgOTkuNjEyTDM4Ny40MzMgODYuMTl6Ii8+PC9nPjxnIG1hc2s9InVybCgjYikiPjxwYXRoIGZpbGw9IiMwMDVFRUQiIGQ9Ik0xODEuNzQzIDEwMi41TDE0Ni41IDEyMi45OGwzNS40NzMgMjAuNDgxIDM1LjI0My0yMC40ODJ6Ii8+PHBhdGggZmlsbD0iIzFCNzZGRiIgZD0iTTE0Ni43MzQgNjUuNWwtLjExNSA0MC43NTggMzUuNDcyIDIwLjQ4MS4xMTYtNDAuNzU5eiIvPjxwYXRoIGZpbGw9IiMwMDY1RkUiIGQ9Ik0xODEuOTczIDQ1LjAyTDE0Ni43MyA2NS41bDM1LjQ3MyAyMC40OCAzNS4yNDMtMjAuNDgyeiIvPjxwYXRoIGZpbGw9IiMwMDVFRUQiIGQ9Ik0yMTcuNDQ2IDY1LjVsLTM1LjI0MiAyMC40OC0uMTE2IDQwLjc1OSAzNS4yNDMtMjAuNDgxeiIvPjwvZz48ZyBtYXNrPSJ1cmwoI2IpIj48cGF0aCBmaWxsPSIjMDA1RUVEIiBkPSJNMzU3LjcxNiA1NS4wNzdsLTEwNS43MTggNjEuMzg4LS4yODIgOTkuNjEyIDEwNS43MTctNjEuMzg4eiIvPjxwYXRoIGZpbGw9IiMwMDY1RkUiIGQ9Ik0zMjkuNzU2IDM5bC0xMDUuNjAxIDYxLjM4NyAyNy44OTggMTYuMTEzIDEwNS42MDItNjEuMzg4TDMyOS43NTcgMzl6Ii8+PHBhdGggZmlsbD0iIzFCNzZGRiIgZD0iTTIyNC4yOCAxMDAuMzEybC0uMjggOTkuODUgMjcuNzIgMTYuMTUuMjgtOTkuODV6Ii8+PHBhdGggZD0iTTIyOS4zODUgMTA5LjIyM2MuOS41MiAxLjYzIDEuNzggMS42MjYgMi44MTMtLjAwMyAxLjAzNC0uNzM2IDEuNDUtMS42MzYuOTMxLS45LS41MTktMS42My0xLjc3OS0xLjYyNi0yLjgxMi4wMDMtMS4wMzQuNzM2LTEuNDUxIDEuNjM2LS45MzJtMTEuMTE1IDkuMDg3bDcuNDk0IDQuMzQyLjAwNi0yLjI4NnYtLjA2bC03LjQ5My00LjM0MnoiIGZpbGw9IiMwMDU5RTAiLz48cGF0aCBkPSJNMjI4LjUgMTk2LjUyM2wuMDE3LTYuMTA0TDI0OCAyMDEuNzF2LjE1NmwtLjAxNyA1Ljk0Ny0xOS40ODMtMTEuMjg5em0wLTguODI4bC4wMTctNi4xTDI0OCAxOTIuODg1di4xNTZsLS4wMTcgNS45NDMtMTkuNDgzLTExLjI4OXptMC04LjgyNmwuMDE3LTYuMUwyNDggMTg0LjA1OXYuMTU2bC0uMDE3IDUuOTQzTDIyOC41IDE3OC44N3ptMC04LjgyNmwuMDE3LTYuMUwyNDggMTc1LjIzM3YuMTU1bC0uMDE3IDUuOTQ0LTE5LjQ4My0xMS4yOXptMC04LjgyNmwuMDE3LTYuMUwyNDggMTY2LjQwN3YuMTU1bC0uMDE3IDUuOTQ0LTE5LjQ4My0xMS4yOXptMC04LjgyNWwuMDE3LTYuMTAzTDI0OCAxNTcuNTh2LjE1NmwtLjAxNyA1Ljk0Ni0xOS40ODMtMTEuMjg5em0wLTguODI4bC4wMTctNi4xTDI0OCAxNDguNzU0di4xNTZsLS4wMTcgNS45NDQtMTkuNDgzLTExLjI5em0wLTguODI2bC4wMTctNi4xTDI0OCAxMzkuOTI4di4xNTZsLS4wMTcgNS45NDQtMTkuNDgzLTExLjI5em0wLTguODI2bC4wMTctNi4xTDI0OCAxMzEuMTAydi4xNTZsLS4wMTcgNS45NDMtMTkuNDgzLTExLjI4OXoiIGZpbGw9IiMwMDVFRUQiLz48cGF0aCBmaWxsPSIjMDA2NUZFIiBkPSJNMzY4Ljc1NiA2My41bC0xMDUuNjAxIDYxLjM4N0wyOTEuMDUzIDE0MWwxMDUuNjAyLTYxLjM4OEwzNjguNzU3IDYzLjV6Ii8+PHBhdGggZmlsbD0iIzFCNzZGRiIgZD0iTTI2My4yOCAxMjQuODEybC0uMjggOTkuODUgMjcuNzIgMTYuMTUuMjgtOTkuODV6Ii8+PHBhdGggZD0iTTI2OC4zODUgMTMzLjcyM2MuOS41MiAxLjYzIDEuNzggMS42MjYgMi44MTMtLjAwMyAxLjAzNC0uNzM2IDEuNDUtMS42MzYuOTMxLS45LS41MTktMS42My0xLjc3OS0xLjYyNi0yLjgxMi4wMDMtMS4wMzQuNzM2LTEuNDUxIDEuNjM2LS45MzJtMTEuMTE1IDkuMDg3bDcuNDk0IDQuMzQyLjAwNi0yLjI4NnYtLjA2bC03LjQ5My00LjM0MnoiIGZpbGw9IiMwMDU5RTAiLz48cGF0aCBkPSJNMjY3LjUgMjIxLjAyM2wuMDE3LTYuMTA0TDI4NyAyMjYuMjF2LjE1NmwtLjAxNyA1Ljk0Ny0xOS40ODMtMTEuMjg5em0wLTguODI4bC4wMTctNi4xTDI4NyAyMTcuMzg1di4xNTZsLS4wMTcgNS45NDMtMTkuNDgzLTExLjI4OXptMC04LjgyNmwuMDE3LTYuMUwyODcgMjA4LjU1OXYuMTU2bC0uMDE3IDUuOTQzTDI2Ny41IDIwMy4zN3ptMC04LjgyNmwuMDE3LTYuMUwyODcgMTk5LjczM3YuMTU1bC0uMDE3IDUuOTQ0LTE5LjQ4My0xMS4yOXptMC04LjgyNmwuMDE3LTYuMUwyODcgMTkwLjkwN3YuMTU1bC0uMDE3IDUuOTQ0LTE5LjQ4My0xMS4yOXptMC04LjgyNWwuMDE3LTYuMTAzTDI4NyAxODIuMDh2LjE1NmwtLjAxNyA1Ljk0Ni0xOS40ODMtMTEuMjg5em0wLTguODI4bC4wMTctNi4xTDI4NyAxNzMuMjU0di4xNTZsLS4wMTcgNS45NDQtMTkuNDgzLTExLjI5em0wLTguODI2bC4wMTctNi4xTDI4NyAxNjQuNDI4di4xNTZsLS4wMTcgNS45NDQtMTkuNDgzLTExLjI5em0wLTguODI2bC4wMTctNi4xTDI4NyAxNTUuNjAydi4xNTZsLS4wMTcgNS45NDMtMTkuNDgzLTExLjI4OXpNMzk2LjcxNiA3OS41NzdsLTEwNS43MTggNjEuMzg4LS4yODIgOTkuNjEyIDEwNS43MTctNjEuMzg4eiIgZmlsbD0iIzAwNUVFRCIvPjwvZz48L2c+PC9zdmc+");
+        background-repeat: no-repeat;
+        background-position: 100% 100%;
+        background-color: #006eff;
+      }
+      .header .title {
+        line-height: 32px;
+        color: #fff;
+        font-size: 16px;
+      }
+      .header .close {
+        display: inline-block;
+        font-size: 0;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .header .close .close-icon {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTEyLjUzNSAyLjA1TDggNi41ODUgMy40NjQgMi4wNSAyLjA1IDMuNDY1bDQuNTM2IDQuNTM2LTQuNTM2IDQuNTM1IDEuNDE0IDEuNDE0TDggOS40MTVsNC41MzUgNC41MzUgMS40MTUtMS40MTQtNC41MzYtNC41MzUgNC41MzYtNC41MzZ6IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=");
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-position: inherit;
+        font-size: 0;
+      }
+      .body {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+      }
+      .body ul.history-list {
+        margin: 0;
+        padding: 0;
+      }
+      .body ul.history-list li {
+        list-style: none;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+      .body ul.history-list li a {
+        text-decoration: none;
+      }
+      .body ul.history-list li a .question {
+        color: #000;
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+      }
+      .body ul.history-list li a .question .badge {
+        display: inline-block;
+        font-size: 12px;
+        color: white;
+        margin-right: 5px;
+        background-color: #006eff;
+        min-width: 40px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      .body ul.history-list li a .answer {
+        margin-top: 4px;
+        color: #333;
+        font-size: 12px;
+      }
+      .body ul.history-list li a .answer .time {
+        color: #999;
+        margin-left: 20px;
+      }
+      .body ul.history-list li a:hover {
+        color: #006eff;
+      }
+
+      .footer {
+        height: 40px;
+        border-top: 1px solid #000;
+      }
+    </style>
+    <div class="history">
+      <div class="header">
+        <span class="title">历史记录</span>
+        <div class="close" id="close">
+          <i class="close-icon"></i>
+        </div>
+      </div>
+      <div class="body" id="body">
+        <ul class="history-list">
+          <li>
+            <a href="https://cloud.tencent.com/">
+              <div class="question">
+                <span class="badge">问答</span>
+                <span
+                  >首颗国产 1.8 亿像素相机全画幅 CMOS
+                  成功试产，有哪些信息值得关注？</span
+                >
+              </div>
+              <div class="answer">
+                <span
+                  >乌克兰现在作战主力是无人可警方很快的结束方式打机，目前已达到几百万无人机规模，每...</span
+                >
+                <span class="time">2024/12/21 12:03:03</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </body>
+</html>

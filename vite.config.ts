@@ -24,7 +24,12 @@ export default defineConfig({
         // icon64: "",
         // icon64URL: "",
         // 将可用函数列入白名单
-        grant: ["GM.getValue", "GM.setValue", "GM.registerMenuCommand"],
+        // grant: [
+        //   "GM.getValue",
+        //   "GM.setValue",
+        //   "GM.registerMenuCommand",
+        //   "GM.xmlHttpRequest",
+        // ],
         author: "tatoo",
         // homepage: "",
         // homepageURL: "",
@@ -45,6 +50,7 @@ export default defineConfig({
         // match: ["https://www.zhihu.com/*"],
         // exclude: [],
         "run-at": "document-idle",
+        // "run-at": "document-end",
         sandbox: "raw",
         // 该标签定义域（无顶级域），包括允许由GM_xmlhttpRequest检索的子域
         // connect: "self",
