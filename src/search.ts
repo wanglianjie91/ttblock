@@ -12,7 +12,9 @@ export function removeKfe() {
 export function removeSide() {
   const content = document.querySelector("#SearchMain");
   const siderbar = content?.nextElementSibling;
-  siderbar?.remove();
+  setTimeout(() => {
+    siderbar?.remove();
+  }, 300);
   if (content) {
     (content as HTMLElement).style.width = "100%";
   }

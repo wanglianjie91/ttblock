@@ -33,7 +33,14 @@ export const history = {
     // const
   },
   network() {
-    // todo
+    monkeyWindow.middleMan.addHook(
+      "https://www.zhihu.com/api/v4/answers/*/relationship?desktop=true",
+      {
+        async requestHandler({ url }: { url: string }) {
+          console.log(url);
+        },
+      }
+    );
   },
 };
 
@@ -57,7 +64,9 @@ export function removeSide() {
     '[data-za-detail-view-path-module="RightSideBar"]'
   );
   const content = document.querySelector(".Topstory-mainColumn");
-  siderbar?.remove();
+  setTimeout(() => {
+    siderbar?.remove();
+  }, 300);
   if (content) {
     (content as HTMLElement).style.width = "100%";
   }
