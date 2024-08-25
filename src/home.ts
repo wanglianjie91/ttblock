@@ -1,12 +1,13 @@
+import { query, trim } from "./utils";
+
 // 历史记录
-export const history = {
-  // 初始化
-  init: function () {
+class History {
+  dbKey = "GM_ZH_HISTORY";
+  init() {
     this.addNav();
     this.network();
-  },
-  // 添加导航
-  addNav: function () {
+  }
+  addNav() {
     const nav = document.querySelector(".Topstory-tabs");
     const topstory = ["/", "/follow", "/hot", "/zvideo"];
     const { pathname } = window.location;
@@ -28,21 +29,66 @@ export const history = {
         }
       });
     }
-  },
-  open: function () {
-    // const
-  },
+  }
+  open() {}
   network() {
     monkeyWindow.middleMan.addHook(
-      "https://www.zhihu.com/api/v4/answers/*/relationship?desktop=true",
+      /^https:\/\/www\.zhihu\.com\/api\/v4\/(answers|articles)\/.*\/relationship\?desktop=true$/,
       {
-        async requestHandler({ url }: { url: string }) {
-          console.log(url);
+        async responseHandler({ url }: { url: string }) {
+          const answerRex =
+            /https:\/\/www\.zhihu\.com\/api\/v4\/answers\/(\d+)\/relationship\?desktop=true/;
+          const articleRex =
+            /https:\/\/www\.zhihu\.com\/api\/v4\/articles\/(\d+)\/relationship\?desktop=true/;
+
+          const answerMatch = url.match(answerRex);
+          const articleMatch = url.match(articleRex);
+
+          let type = 0,
+            id = "0",
+            address = "";
+
+          if (answerMatch) {
+            id = answerMatch[1];
+            type = 1;
+            address = `https://www.zhihu.com/api/v4/answers/3509868646`;
+          }
+          if (articleMatch) {
+            id = articleMatch[1];
+            type = 2;
+            address = `https://www.zhihu.com/api/v4/articles/${id}`;
+          }
+          console.log(address);
+          if (type === 0) return;
+
+          GM_xmlhttpRequest({
+            method: "GET",
+            url: address,
+            headers: {
+              // 需要逆向出header参数 todo
+            },
+            onload: function (response) {
+              console.log(response);
+              if (
+                response.readyState === 4 &&
+                response.status >= 200 &&
+                response.status <= 400
+              ) {
+                // todo
+              }
+              console.log(response.responseText);
+            },
+          });
         },
       }
     );
-  },
-};
+  }
+  async getHistory(offset = 0) {
+    const his = await GM.getValue(this.dbKey, []);
+    return his.slice(offset, 10);
+  }
+}
+export const history = new History();
 
 // 广告
 export function removeAds() {

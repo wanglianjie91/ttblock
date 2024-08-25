@@ -47,12 +47,9 @@ export default defineConfig({
         ],
         // preload 预加载可由脚本通过GM_getResourceURL和GM_getResourceText访问的资源。
         resource: {},
-        // 不支持hash路由，支持正则
-        include: ["*://www.zhihu.com/*"],
-        // match: ["https://www.zhihu.com/*"],
+        match: ["*://*.zhihu.com/*"],
         // exclude: [],
         "run-at": "document-start",
-        // "run-at": "document-end",
         sandbox: "raw",
         // 该标签定义域（无顶级域），包括允许由GM_xmlhttpRequest检索的子域
         // connect: "self",
